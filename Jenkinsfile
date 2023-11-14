@@ -3,11 +3,13 @@ pipeline {
     stages {
         stage("Dependencies") {
             steps {
-                "python -m pip install -r requirments.txt"
+                python -m pip install -r requirments.txt
             }
         }
         stage("Tests"){
-            "python test_main.py"
+            steps{
+                python test_main.py
+            }
         }
         
     }
