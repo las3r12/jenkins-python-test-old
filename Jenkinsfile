@@ -19,9 +19,11 @@ pipeline {
         }
 
         stage("report"){
+            steps{
                 sh 'python -m coverage xml'
                 sh 'python -m coverage html'
                 sh 'python -m coverage report'
+            }
         }
     }
     post{
