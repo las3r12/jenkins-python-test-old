@@ -18,8 +18,13 @@ pipeline {
                 sh 'python -m coverage html'
                 sh 'python -m coverage xml'
                 sh 'python -m coverage report'
+                sh 'pycobertura show --format html --output coverage.html coverage.xml'
             }
         }
-        
+    }
+    post{
+        always {
+            junit 'coverage.html'
+        }
     }
 }
