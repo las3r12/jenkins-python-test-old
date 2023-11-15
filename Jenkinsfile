@@ -6,24 +6,28 @@ pipeline {
         }
     }
     stages {
-        stage("Dependencies") {
+        stage("dependencies") {
             steps {
                 sh 'pip install -r requirements.txt'
             }
         }
-        stage("Tests"){
+        stage("tests"){
             steps{
                 sh 'python -m coverage run -m nose2'
-                sh 'python -m coverage html'
-                sh 'python -m coverage xml'
-                sh 'python -m coverage report'
-                sh 'pycobertura show --format html --output coverage.html coverage.xml'
+                
             }
+        }
+
+        stage("report"){
+                sh 'python -m coverage xml'
+                sh 'python -m coverage html'
+                sh 'python -m coverage report'
         }
     }
     post{
         always {
-            archiveArtifacts artifacts: 'coverage.html', onlyIfSuccessful: true
+            archiveArtifacts 'htmlcov/*'
+            cobertura coberturaReportFile : 'coverage.xml'
         }
     }
 }
