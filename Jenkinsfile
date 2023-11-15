@@ -24,7 +24,7 @@ pipeline {
     }
     post{
         always {
-            junit 'coverage.html'
+            archiveArtifacts artifacts: 'coverage.html', onlyIfSuccessful: true
         }
     }
 }
