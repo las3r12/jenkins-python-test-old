@@ -13,7 +13,11 @@ pipeline {
         }
         stage("Tests"){
             steps{
-                sh 'nose2'
+                sh 'python -m nose2'
+                sh 'python -m coverage run main.py'
+                sh 'python -m coverage html'
+                sh 'python -m coverage xml'
+                sh 'python -m coverage report'
             }
         }
         
