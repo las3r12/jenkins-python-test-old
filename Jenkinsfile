@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Tests"){
             steps{
-                sh 'python test_main.py'
+                sh 'nose2'
             }
         }
         
